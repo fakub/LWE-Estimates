@@ -23,7 +23,8 @@ MLA_RANGE_U = 40
 MLA_STEP    = 2
 
 # hard paths
-SAGE_PATH = "/home/klemsa/sources/sage-9.4-Ubuntu_20.04-x86_64/SageMath/sage"
+#~ SAGE_PATH = "/home/klemsa/sources/sage-9.4-Ubuntu_20.04-x86_64/SageMath/sage"
+SAGE_PATH = "/home/fakub/sources/SageMath/sage"
 LWE_EST_SAGE = "LWE-estimator.sage"
 RES_FILE_BASE = "lwe-security"
 LAMBDA_DB_YAML = RES_FILE_BASE + "-db.yaml"
@@ -39,20 +40,20 @@ PNG_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.png"
 
 def lwe_est(n, mla)
     est_code = File.read LWE_EST_SAGE
-    
+
     est_code += "\n"
     est_code += "n, stdv = #{n}, 2^-#{mla}"
     est_code += '
 set_verbose(1)
-_ = estimate_lwe(n, sqrt(2*pi)*stdv, 2^32,  reduction_cost_model=BKZ.sieve, secret_distribution=(0,1))    
+_ = estimate_lwe(n, sqrt(2*pi)*stdv, 2^32,  reduction_cost_model=BKZ.sieve, secret_distribution=(0,1))
 '
     File.write LWE_EST_TMP_PARAMS_SAGE, est_code
     res = `#{SAGE_PATH} #{LWE_EST_TMP_PARAMS_SAGE} 2>&1`
-    File.delete LWE_EST_TMP_PARAMS_SAGE
-    File.delete LWE_EST_TMP_PARAMS_SAGE_PY
-    
+    File.delete LWE_EST_TMP_PARAMS_SAGE    if File.exists? LWE_EST_TMP_PARAMS_SAGE
+    File.delete LWE_EST_TMP_PARAMS_SAGE_PY if File.exists? LWE_EST_TMP_PARAMS_SAGE_PY
+
     pow = res[/2\^[0-9]+\.[0-9]+/]
-    
+
     return pow.nil? ? -Float::INFINITY : pow.gsub("2^", "").to_f
 end
 
