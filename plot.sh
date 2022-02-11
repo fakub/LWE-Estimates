@@ -13,17 +13,16 @@ MLA_STEP = ARG6
 set term pngcairo dashed size 1800,900
 set out OUT
 
-set xtics  font ",10"
-set ytics  font ",10"
-
 unset key
 
 set xrange [0:N_MAX]
-set xtics N_STEP
+set xtics N_STEP font ",10" rotate by 45 right
+
 set yrange [0:MLA_MAX]
-set ytics MLA_STEP
-set cbrange [64:330]
-set cbtics 32
+set ytics MLA_STEP font ",10"
+
+set cbrange [64:600]
+set cbtics 64
 
 set grid
 
