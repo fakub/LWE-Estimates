@@ -17,16 +17,19 @@ unset key
 
 set xrange [0:N_MAX]
 set xtics N_STEP font ",10" rotate by 45 right
+set xlabel "LWE dimension n"
 
 set yrange [0:MLA_MAX]
 set ytics MLA_STEP font ",10"
+
+set ylabel "-log(alpha)"
 
 set cbrange [64:600]
 set cbtics 64
 
 set grid
 
-set tmargin at screen 0.08
+set tmargin at screen 0.12
 set bmargin at screen 0.95
 
 set pm3d map
@@ -44,6 +47,6 @@ set palette negative defined ( \
                       6 "#ff7000",\
                       7 "#ee0000",\
                       8 "#ffffff")
-                      
-splot RES matrix nonuniform 
+
+splot RES matrix nonuniform
 
