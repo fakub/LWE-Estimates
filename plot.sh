@@ -11,26 +11,28 @@ MLA_MAX  = ARG5
 MLA_STEP = ARG6
 
 set term pngcairo dashed size 1800,900
+#~ set term epslatex size 16cm,8cm color colortext standalone font 10 header \
+#~ '\usepackage{amsmath}\usepackage{nicefrac}'
+
 set out OUT
 
-unset key
-
 set xrange [0:N_MAX]
-set xtics N_STEP font ",10" rotate by 45 right
-set xlabel "LWE dimension n"
+set  xtics 8*N_STEP
+set mxtics 8
 
-set yrange [0:MLA_MAX]
-set ytics MLA_STEP font ",10"
+set yrange [8:MLA_MAX]
+set  ytics 5*MLA_STEP
+set mytics 5
 
-set ylabel "-log(alpha)"
-
-set cbrange [64:600]
+set cbrange [64:576]
 set cbtics 64
 
-set grid
+set grid mxtics xtics mytics ytics
 
-set tmargin at screen 0.12
-set bmargin at screen 0.95
+#~ set tmargin at screen 0.15
+#~ set rmargin at screen 0.88
+#~ set bmargin at screen 0.95
+#~ set lmargin at screen 0.10
 
 set pm3d map
 set pm3d interpolate 0,0
@@ -48,5 +50,16 @@ set palette negative defined ( \
                       7 "#ee0000",\
                       8 "#ffffff")
 
-splot RES matrix nonuniform
+#~ unset key
+set key at 987,37.9
+
+set xlabel 'LWE dimension n'
+set ylabel 'log(alpha)' offset -1,0
+
+splot RES matrix nonuniform t 'Est. bit-security of LWE'
+
+#~ set xlabel '\LWE dimension $n$'
+#~ set ylabel '$-\log(\alpha)$' offset -1,0
+
+#~ splot RES matrix nonuniform t 'Est.\ bit-security of \LWE'
 

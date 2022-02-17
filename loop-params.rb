@@ -45,7 +45,7 @@ def lwe_est(n, mla)
     est_code += "n, stdv = #{n}, 2^-#{mla}"
     est_code += '
 set_verbose(1)
-_ = estimate_lwe(n, sqrt(2*pi)*stdv, 2^32,  reduction_cost_model=BKZ.sieve, secret_distribution=(0,1))
+_ = estimate_lwe(n, sqrt(2*pi)*stdv, 2^64,  reduction_cost_model=BKZ.sieve, secret_distribution=(0,1))
 '
     File.write LWE_EST_TMP_PARAMS_SAGE, est_code
     res = `#{SAGE_PATH} #{LWE_EST_TMP_PARAMS_SAGE} 2>&1`
