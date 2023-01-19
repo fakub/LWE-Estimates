@@ -1,0 +1,7 @@
+Algorithm <estimator.lwe_bkw.CodedBKW object at 0x7f9f3debd5e0> on LWEParameters(n=560, q=18446744073709551616, Xs=D(σ=0.50, μ=0.50), Xe=D(σ=224455177475792.72), m=+Infinity, tag=None) failed with 'NoneType' object is not subscriptable
+usvp                 :: rop: ≈2^103.2, red: ≈2^103.2, δ: 1.005347, β: 258, d: 1012, tag: usvp
+bdd                  :: rop: ≈2^110.7, red: ≈2^96.2, svp: ≈2^110.7, β: 233, η: 320, d: 938, tag: bdd
+bdd_hybrid           :: rop: ≈2^259.9, red: ≈2^97.5, svp: ≈2^259.9, β: 233, η: 855, ζ: 0, |S|: 1, d: 2090, prob: 1, ↻: 1, tag: hybrid
+bdd_mitm_hybrid      :: rop: ≈2^876.3, red: ≈2^875.8, svp: ≈2^874.4, β: 233, η: 2, ζ: 280, |S|: ≈2^148.6, d: 1810, prob: ≈2^-776.3, ↻: ≈2^778.5, tag: hybrid
+dual                 :: rop: ≈2^106.2, mem: ≈2^56.0, m: 506, β: 265, d: 1066, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^99.4, mem: ≈2^95.7, m: 475, β: 240, d: 992, ↻: 1, ζ: 43, tag: dual_hybrid

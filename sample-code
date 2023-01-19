@@ -1,0 +1,6 @@
+import sys
+sys.path.append("../lattice-estimator/")
+from estimator import *
+from estimator.lwe_parameters import LWEParameters
+from estimator.nd import NoiseDistribution as ND
+LWE.estimate(LWEParameters(n=560, q=2^64, Xs=ND.Uniform(0,1), Xe=ND.DiscreteGaussianAlpha(3.05*10^(-5), 2^64), m=sage.all.oo))

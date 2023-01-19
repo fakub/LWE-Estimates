@@ -16,13 +16,17 @@ set term pngcairo dashed size 1800,900
 
 set out OUT
 
-set xrange [0:N_MAX]
-set  xtics 8*N_STEP
-set mxtics 8
+#~ set xrange [0:N_MAX]
+set xrange [0:2048]
+#~ set  xtics 8*N_STEP
+set  xtics N_STEP
+set mxtics 1
 
-set yrange [8:MLA_MAX]
-set  ytics 5*MLA_STEP
-set mytics 5
+#~ set yrange [8:MLA_MAX]
+set yrange [8:40]
+#~ set  ytics 5*MLA_STEP
+set  ytics MLA_STEP
+set mytics 1
 
 set cbrange [64:576]
 set cbtics 64

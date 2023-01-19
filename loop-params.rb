@@ -14,23 +14,30 @@ LAMBDA_DEF = 0.42
 #MLA_RANGE_U = 40
 #MLA_STEP    = 5
 
-N_RANGE_L = 128
-N_RANGE_U = 2048
-N_STEP    = 32
+#~ N_RANGE_L = 128
+#~ N_RANGE_U = 2048
+#~ N_STEP    = 32
 
-MLA_RANGE_L = 8
-MLA_RANGE_U = 40
-MLA_STEP    = 2
+#~ MLA_RANGE_L = 8
+#~ MLA_RANGE_U = 40
+#~ MLA_STEP    = 2
+
+N_RANGE_L = 256
+N_RANGE_U = 1536
+N_STEP    = 256
+
+MLA_RANGE_L = 16
+MLA_RANGE_U = 32
+MLA_STEP    = 8
 
 # hard paths
 #~ SAGE_PATH = "/home/klemsa/sources/sage-9.4-Ubuntu_20.04-x86_64/SageMath/sage"
 SAGE_PATH = "/home/fakub/sources/SageMath/sage"
-LWE_EST_SAGE = "LWE-estimator.sage"
 RES_FILE_BASE = "lwe-security"
 LAMBDA_DB_YAML = RES_FILE_BASE + "-db.yaml"
 
 # tmp paths
-LWE_EST_TMP_PARAMS_SAGE = "LWE-estimator_tmp-with-params.sage"
+LWE_EST_TMP_PARAMS_SAGE = "lattice-estimator_tmp-with-params.sage"
 LWE_EST_TMP_PARAMS_SAGE_PY = LWE_EST_TMP_PARAMS_SAGE + ".py"
 
 # output paths
@@ -39,22 +46,23 @@ RES_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.dat"
 PNG_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.png"
 
 def lwe_est(n, mla)
-    est_code = File.read LWE_EST_SAGE
-
-    est_code += "\n"
-    est_code += "n, stdv = #{n}, 2^-#{mla}"
-    est_code += '
-set_verbose(1)
-_ = estimate_lwe(n, sqrt(2*pi)*stdv, 2^64,  reduction_cost_model=BKZ.sieve, secret_distribution=(0,1))
+    est_code = '
+import sys
+sys.path.append("../lattice-estimator/")
+from estimator import *
+from estimator.lwe_parameters import LWEParameters
+from estimator.nd import NoiseDistribution as ND
 '
+    est_code += "LWE.estimate(LWEParameters(n=#{n}, q=2^64, Xs=ND.Uniform(0,1), Xe=ND.DiscreteGaussianAlpha(2^-#{mla}, 2^64), m=sage.all.oo))"
+
     File.write LWE_EST_TMP_PARAMS_SAGE, est_code
     res = `#{SAGE_PATH} #{LWE_EST_TMP_PARAMS_SAGE} 2>&1`
     File.delete LWE_EST_TMP_PARAMS_SAGE    if File.exists? LWE_EST_TMP_PARAMS_SAGE
     File.delete LWE_EST_TMP_PARAMS_SAGE_PY if File.exists? LWE_EST_TMP_PARAMS_SAGE_PY
 
-    pow = res[/2\^[0-9]+\.[0-9]+/]
+    pow = res.scan(/rop: ≈2\^[0-9]+\.[0-9]+/).map{|e| e[8..].to_f }.min   # res[/2\^[0-9]+\.[0-9]+/]
 
-    return pow.nil? ? -Float::INFINITY : pow.gsub("2^", "").to_f
+    pow.nil? ? -Float::INFINITY : pow
 end
 
 File.write LAMBDA_DB_YAML, {}.to_yaml unless File.file? LAMBDA_DB_YAML
