@@ -22,11 +22,11 @@ require "yaml"
 #~ MLA_RANGE_U = 40
 #~ MLA_STEP    = 2
 
-N_RANGE_L = 256
+N_RANGE_L = 0
 N_RANGE_U = 2048
 N_STEP    = 256
 
-MLA_RANGE_L = 16
+MLA_RANGE_L = 8
 MLA_RANGE_U = 40
 MLA_STEP    = 8
 
