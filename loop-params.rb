@@ -28,7 +28,7 @@ N_STEP    = 256
 
 MLA_RANGE_L = 8
 MLA_RANGE_U = 40
-MLA_STEP    = 8
+MLA_STEP    = 4
 
 # hard paths
 #~ SAGE_PATH = "/home/klemsa/sources/sage-9.4-Ubuntu_20.04-x86_64/SageMath/sage"
