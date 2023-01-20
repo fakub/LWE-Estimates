@@ -3,8 +3,8 @@
 require "yaml"
 
 # threshold under which lambda is not calculated
-LAMBDA_THR = 50.0
-LAMBDA_DEF = 0.42
+#~ LAMBDA_THR = 50.0
+#~ LAMBDA_DEF = 0.42
 
 #N_RANGE_L = 128
 #N_RANGE_U = 1152
@@ -23,11 +23,11 @@ LAMBDA_DEF = 0.42
 #~ MLA_STEP    = 2
 
 N_RANGE_L = 256
-N_RANGE_U = 1536
+N_RANGE_U = 2048
 N_STEP    = 256
 
 MLA_RANGE_L = 16
-MLA_RANGE_U = 32
+MLA_RANGE_U = 40
 MLA_STEP    = 8
 
 # hard paths
@@ -84,21 +84,21 @@ File.open(RES_FILE, 'w') do |file|
         file.write("%4d" % mla)
         # other columns: LWE estimates
         line = []
-        last_l = Float::INFINITY
+        #~ last_l = Float::INFINITY
         N_RANGE_U.step(N_RANGE_L, -N_STEP) do |n|
-            if h[[n,mla]].nil? and last_l >= LAMBDA_THR
+            if h[[n,mla]].nil? # and last_l >= LAMBDA_THR
                 print "    Estimating n = #{n}, -log(alpha) = #{mla} ... " ; $stdout.flush
                 sec = lwe_est(n, mla)
                 puts "%.2f bits" % sec
                 h[[n,mla]] = sec
                 File.write LAMBDA_DB_YAML, h.to_yaml
-            elsif last_l < LAMBDA_THR
-                h[[n,mla]] = LAMBDA_DEF
-                puts "    Skipping n = #{n}, -log(alpha) = #{mla} (lambda < #{LAMBDA_THR})."
+            #~ elsif last_l < LAMBDA_THR
+                #~ h[[n,mla]] = LAMBDA_DEF
+                #~ puts "    Skipping n = #{n}, -log(alpha) = #{mla} (lambda < #{LAMBDA_THR})."
             else
                 puts "    Reading n = #{n}, -log(alpha) = #{mla} from YAML db."
             end
-            last_l = h[[n,mla]]
+            #~ last_l = h[[n,mla]]
             line << h[[n,mla]]
         end
         line.reverse.each{|l| file.write(" %7.2f" % l) }
