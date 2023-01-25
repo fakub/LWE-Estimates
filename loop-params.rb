@@ -6,22 +6,6 @@ require "yaml"
 #~ LAMBDA_THR = 50.0
 #~ LAMBDA_DEF = 0.42
 
-#N_RANGE_L = 128
-#N_RANGE_U = 1152
-#N_STEP    = 64
-
-#MLA_RANGE_L = 5
-#MLA_RANGE_U = 40
-#MLA_STEP    = 5
-
-#~ N_RANGE_L = 128
-#~ N_RANGE_U = 2048
-#~ N_STEP    = 32
-
-#~ MLA_RANGE_L = 8
-#~ MLA_RANGE_U = 40
-#~ MLA_STEP    = 2
-
 N_RANGE_L = 0
 N_RANGE_U = 2048
 N_STEP    = 256
@@ -43,7 +27,8 @@ LWE_EST_TMP_PARAMS_SAGE_PY = LWE_EST_TMP_PARAMS_SAGE + ".py"
 # output paths
 STR_RANGES = "n=#{N_RANGE_L}-#{N_STEP}-#{N_RANGE_U}_mla=#{MLA_RANGE_L}-#{MLA_STEP}-#{MLA_RANGE_U}"
 RES_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.dat"
-PNG_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.png"
+#~ OUT_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.png"
+OUT_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.tex"
 
 def lwe_est(n, mla)
     est_code = '
@@ -109,6 +94,6 @@ end
 puts "(i) Results written to '#{RES_FILE}'."
 
 # run gnuplot script
-system "gnuplot -c plot.sh #{RES_FILE} #{PNG_FILE} #{N_RANGE_U} #{N_STEP} #{MLA_RANGE_U} #{MLA_STEP}"
-puts "(i) Find plot in '#{PNG_FILE}'."
+system "gnuplot -c plot.sh #{RES_FILE} #{OUT_FILE} #{N_RANGE_U} #{N_STEP} #{MLA_RANGE_U} #{MLA_STEP}"
+puts "(i) Find plot in '#{OUT_FILE}'."
 
