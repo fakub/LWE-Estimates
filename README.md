@@ -31,9 +31,9 @@ As the decisive security estimate, we take the lowest `rop` value -- the documen
 ```
 rop: Total number of word operations (approx. CPU cycles)
 ```
-i.e., from the previous output, we read 122.3 bits of security.
+i.e., from the previous output, we read 122.3 bits of security, due to the `dual_hybrid` attack.
 
-In the graph below, we provide security estimates for noise values between 2^-8 .. 2^-40 (standard deviation of noise, denoted alpha; log-scale) and for dimension n between 0 .. 2048.
+In the graph below, we provide security estimates for noise values between 2^-8 .. 2^-40 (standard deviation of noise denoted alpha; log-scale) and for dimension n between 0 .. 2048.
 Note that values are interpolated between grid points.
 
 ![Graph](lwe-security__n=0-256-2048_mla=8-4-40.png)
@@ -44,6 +44,7 @@ The source values can be found in `lwe-security-db.yaml` in a form of (n, -log(a
 ### Previous Version: LWE Estimator
 
 For reference, we provide a similar graph for the predecessor of `lattice-estimator`, named `LWE Estimator` [3] (also by Albrecht et al.).
+Note that the new estimator assumes a broader range of attacks, hence the new estimates are *lower* than with the old one.
 
 ![Graph](old-results/__old__lwe-security__n=128-32-2048_mla=8-2-40.png)
 
