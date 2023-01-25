@@ -10,9 +10,9 @@ N_STEP   = ARG4
 MLA_MAX  = ARG5
 MLA_STEP = ARG6
 
-#~ set term pngcairo dashed size 1800,900
-set term epslatex size 13cm,6.5cm color colortext standalone font 10 header \
-'\usepackage{amsmath}\usepackage{nicefrac}'
+set term pngcairo dashed size 1800,900 font 'Verdana,24'
+#~ set term epslatex size 13cm,6.5cm color colortext standalone font 10 header \
+#~ '\usepackage{amsmath}\usepackage{nicefrac}'
 
 set out OUT
 
@@ -57,8 +57,10 @@ set palette negative defined ( \
 #~ unset key
 set key at 1100,38.5
 
-set xlabel 'LWE dimension $n$'
-set ylabel '$-\log(\alpha)$' offset -1,0
+set xlabel 'LWE dimension n'
+set ylabel '-log(alpha)' offset -1,0
+#~ set xlabel 'LWE dimension $n$'
+#~ set ylabel '$-\log(\alpha)$' offset -1,0
 
 splot RES matrix nonuniform t 'Est.\ bit-security of LWE'
 

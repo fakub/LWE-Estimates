@@ -27,8 +27,8 @@ LWE_EST_TMP_PARAMS_SAGE_PY = LWE_EST_TMP_PARAMS_SAGE + ".py"
 # output paths
 STR_RANGES = "n=#{N_RANGE_L}-#{N_STEP}-#{N_RANGE_U}_mla=#{MLA_RANGE_L}-#{MLA_STEP}-#{MLA_RANGE_U}"
 RES_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.dat"
-#~ OUT_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.png"
-OUT_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.tex"
+OUT_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.png"
+#~ OUT_FILE = "#{RES_FILE_BASE}__#{STR_RANGES}.tex"
 
 def lwe_est(n, mla)
     est_code = '
